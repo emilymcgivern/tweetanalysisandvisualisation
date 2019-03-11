@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div style="text-align:center;">
+          <h1>Sign Up</h1>
+
+        <div style="display: inline-block; text-align: left;">
+        <hr>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div style="text-align:center;">
+            <button type="submit" class="btn btn-success">Sign up</button>
+          </div>
+        </form>
+        </div>
+        </div>
+
+  
+  </div>
+{% endblock %}

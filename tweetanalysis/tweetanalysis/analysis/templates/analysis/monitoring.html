@@ -1,0 +1,70 @@
+{% extends 'analysis/base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+        <div style="text-align:center;">
+            <h1>Start Monitoring</h1>
+        </div>
+        <hr>
+
+  <form action="{% url 'replies' %}" method="post" autocomplete="off">
+    {% csrf_token %}
+        <label for="optTweet" class="sr-only">Monitor your Tweet</label><br>
+          <div style="text-align:center; padding: 5px 10px;">
+                  <select multiple class="form-control" id="optTweet" name="tweet" required>
+                      {% for project in projects %}
+                        <option value="{{project.id_str}}">Tweet: {{project.text}}, Likes: {{project.likes}},Retweets: {{project.retweets}}</option>
+                      {% endfor %}
+                  </select>
+              </div>
+
+          <div style="text-align:center; padding: 5px 10px;">
+            <h5> Pick a date to monitor tweet until </h5>
+  
+
+          <div class="form-group row" style = "display:inline-block;">
+                  <div class="col-sm-10">
+                    <input id="datepicker" name = "tweet" width="276"/>
+                      <script>
+                          $('#datepicker').datepicker({
+                            uiLibrary: 'bootstrap4'
+                          });
+                      </script>
+                  </div>
+          </div>
+        </div>
+        
+
+
+              <div style="text-align:center; padding: 0px 5px 0px 5px;">
+                  <input class="btn btn-success" type="submit" name="responses" value="Start Monitoring"/>
+              </div>
+
+
+
+
+          <div style="text-align:center; padding: 25px 5px 0px 5px;">
+            <p><b> OR </b></p>
+            <h5> Pick a number of likes or retweets to monitor tweet until </h5>
+          </div>
+              <div class="form-group row" style="text-align:left; padding: 5px 10px;">
+                <label class="col-sm-2 col-form-label">Likes</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" size="50" name="tweet" id="handle" placeholder="Please enter number of likes to stop tracking at"/>
+                  </div>
+              </div>
+
+              <div class="form-group row" style="text-align:left; padding: 5px 10px;">
+                <label class="col-sm-2 col-form-label">Retweets</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" size="50" name="tweet" id="handle" placeholder="Please enter number of retweets to stop tracking at"/>
+                  </div>
+              </div>
+          
+              <div style="text-align:center; padding: 0px 5px 0px 5px;">
+                  <input class="btn btn-success" type="submit" name="responses" value="Start Monitoring"/>
+              </div>
+    </form>
+</div>
+
+{% endblock %}

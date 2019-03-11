@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: camilla.boyle36@mail.dcu.ie
+Date: Sat, 02 Feb 2019 18:46:01 -0000
+Message-ID: <154913316153.67990.13433689279131549314@Mills-MacBook-Pro.local>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/accounts/reset/MQ/53i-6c3f4db50a3d383b0413/
+
+Your username, in case you've forgotten: dcu
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------

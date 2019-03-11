@@ -1,0 +1,107 @@
+{% extends 'analysis/base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+      <div class="row">
+            <div class="form-group col-md-12">
+        <div style="text-align:center;">
+                <h1>Your Profile</h1>
+                </div>
+
+          <!-- nav tabs code -->
+          <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                  <li class="nav-item">
+                      <a class="nav-link active" id="monitored-tab" data-toggle="tab" href="#monitored" role="tab" aria-controls="monitored" aria-selected="true">Monitored Tweets</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Unmonitored Tweets</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="graphs-tab" data-toggle="tab" href="#graphs" role="tab" aria-controls="graphs" aria-selected="false">My Graphs</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="monitored" role="tabpanel" aria-labelledby="monitored-tab">
+                <form action="{% url 'check' %}" method="post" autocomplete="off">
+                  {% csrf_token %}
+                  <div style="text-align:center;">
+                      <h5>You are monitoring the following Tweets</h5>
+                  </div>
+                  <!-- Loop to display a tweet which has been returned as an object in the views -->
+                  <label for="optTweet" class="sr-only">Select a tweet</label><br>
+                  <select multiple class="form-control" size = "25" id="optTweet" name="tweet" required>
+                    {% for r in returned %}
+                      <option disabled value="{{r.id}}">Tweet</option>
+                      <option value="{{r.tweetidstr}}">Tweet: {{ r.tweet_text }}, Posted by: {{ r.user_posted }}</option>
+                      <option disabled style = "color: green;" value="">Status: {{"Running"}}</option>
+                      <option disabled value="{{r.id}}"></option>
+                    {% endfor %}
+                  </select>
+
+                  <div style="text-align:center; padding: 5px 10px;">
+                    <input class="btn btn-success" type="submit" name="submit" value="Check Your Graph Progress"/>
+                  </div>
+                    
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <form action="{% url 'monitoring' %}" method="post" autocomplete="off">
+                  {% csrf_token %}
+                  <div style="text-align:center;">
+                      <h5>You have saved the following tweets</h5>
+                  </div>
+                  <label for="optTweet" class="sr-only">Select a tweet</label><br>
+                  <select multiple class="form-control" size = "25" id="optTweet" name="tweet" required>
+                    {% for tweet in saved_tweets %}
+                      <option style = "color: #000; font-weight: bold;" disabled value="{{tweet.id}}">Tweet</option>
+                      <option value="{{tweet.id_str}}">{{ tweet.text }}</option>
+                      <option disabled style = "color: #000;">Posted by: {{tweet.posted_by}}</option>
+                      <option disabled style = "color:{% if tweet.sentiment_value < 0 %}red{% elif tweet.sentiment_value > 0 %}green{% else %}orange{% endif %}">Sentiment: {{tweet.sentiment_value}}</option>
+                      <option disabled value="{{tweet.id}}"></option>
+                    {% endfor %}
+                  </select>
+
+                  <div style="text-align:center; padding: 5px 10px;">
+                    <p>Please choose a tweet you would like to monitor</p>
+                    <input class="btn btn-danger" type="submit" name="delete" value="Delete"/>
+                    <input class="btn btn-success" type="submit" name="submit" value="Monitor"/>
+                  </div>
+                    
+                </form>
+            </div>
+
+            <!-- Tabs to view the various graphs -->
+            <div class="tab-pane fade" id="graphs" role="tabpanel" aria-labelledby="graphs-tab">
+
+              <div style="text-align:center;">
+                <h5> Please choose a graph to view from the following list: </h5>
+              </div>
+
+              <div class="list-group">
+                <a href="{% url 'testing_followers' %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">View Followers vs Sentiment Graph</h5>
+                  </div>
+                  <p class="mb-1">View the sentiment compared to the number of followers.</p>
+                </a>
+                <a href="{% url 'testing_likes' %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">View Likes vs Sentiment Graph</h5>
+                  </div>
+                  <p class="mb-1">View the sentiment compared to the number of likes.</p>
+                </a>
+                <a href="{% url 'testing_retweets' %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">View Retweets vs Sentiment Graph</h5>
+                  </div>
+                  <p class="mb-1">View the sentiment compared to the number of retweets.</p>
+                </a>
+              </div>
+            </div>
+    </div>
+{% endblock %}

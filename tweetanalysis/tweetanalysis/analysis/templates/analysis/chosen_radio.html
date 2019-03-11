@@ -1,0 +1,29 @@
+{% extends 'analysis/base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+        <div style="text-align:center;">
+            <h1>Tweet Analysis and Visualisation</h1>
+        </div>
+        <hr>
+       
+            <div style="text-align:center; padding: 5px 10px;">
+              <p><b>You have chosen the following tweet</b></p>
+            </div>
+                  <div style="text-align:center; padding: 5px 10px;">
+                    <p>{{ get_tweet.full_text }}</p>
+                  <div style = "display: inline-block; text-align: left;">
+                    <p><b>Posted by:</b> {{ get_tweet.user.screen_name }}</p>
+                    <p><b>Current Retweets:</b> {{ get_tweet.retweet_count }}</p>
+                    <p><b>Current Favourites:</b> {{ get_tweet.favorite_count }}</p>
+                  <div style = "color:{% if sentiment < 0 %}red{% elif sentiment > 0 %}green{% else %}orange{% endif %}">
+                    <p><b>Sentiment:</b> {{ sentiment|floatformat:2 }}</p>
+                  </div>
+                  </div>
+                    <div style="text-align:center;">
+                      <a href="{% url 'index' %}" class="btn btn-info" role="button">Start Another Search</a>
+                      <a class="btn btn-primary" href="{% url 'profile' %}" role="button">Run Analysis</a>
+                    </div>
+            </div>
+    </div>
+{% endblock %}

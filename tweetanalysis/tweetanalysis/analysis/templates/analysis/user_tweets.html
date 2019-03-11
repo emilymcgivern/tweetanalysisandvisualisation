@@ -1,0 +1,35 @@
+{% extends 'analysis/base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+        <div style="text-align:center;">
+             <h1>Tweet Analysis and Visualisation</h1>
+        </div>
+        
+        <div style="text-align:center; padding: 5px 10px;">
+          <form action="{% url 'chosen_radio' %}" method="post"> 
+              {% csrf_token %}
+                <p>Please choose a tweet</p>
+                <!-- Loop to display a tweet which has been returned as an object in the views -->
+                  <label for="tweet" class="sr-only">Select Tweet to examine</label><br>
+                    <select class="custom-select" size = "25" id="tweet" name="tweet" required>
+                      {% for tweet in user_tweets %}
+                        {% if '@' not in tweet.full_text %} <!-- removing the replies from the query set -->
+                          {% if 'RT' not in tweet.full_text %} <!-- Removing retweets from the query set -->
+                        <option style = "color: #000;" disabled value="{{tweet.id}}">Tweet</option>
+                        <option value="{{tweet.id}}">{{ tweet.full_text }}</option>
+                        <option disabled style = "color: #000;" value="{{tweet.id}}">Date Posted: {{ tweet.created_at }}</option>
+                        <option disabled value=""></option>
+                        {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                    <div style="text-align:center; padding: 5px 10px;">
+                      <a href="{% url 'index'%}" class="btn btn-danger" role="button">Start Again</a>
+                      <input class="btn btn-success" type="submit" name="submit" value="Confirm">
+                    </div>
+          </form>
+        </div>
+  </div>
+
+{% endblock %}

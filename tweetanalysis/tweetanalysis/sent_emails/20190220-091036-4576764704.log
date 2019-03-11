@@ -1,0 +1,18 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [example.com] Please Confirm Your E-mail Address
+From: webmaster@localhost
+To: emilymcgivern15@gmail.com
+Date: Wed, 20 Feb 2019 09:10:36 -0000
+Message-ID: <155065383694.54843.14184796966892115837@Emilys-MacBook-Pro.local>
+
+Hello from example.com!
+
+You're receiving this e-mail because user emily has given yours as an e-mail address to connect their account.
+
+To confirm this is correct, go to http://127.0.0.1:8000/accounts/confirm-email/Mg:1gwNtk:bS1DFPyz8K7vV9FF2qg732_sh0w/
+
+Thank you from example.com!
+127.0.0.1
+-------------------------------------------------------------------------------

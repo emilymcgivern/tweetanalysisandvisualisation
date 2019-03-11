@@ -1,0 +1,25 @@
+{% extends 'analysis/base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+      <hr>
+            <div style="text-align:center;">
+              <h1>Tweet Analysis and Visualisation</h1>
+            </div>
+            
+            <div style="text-align:center; padding: 5px 10px;">
+                <form action="{% url 'user_timeline' %}" method="post" autocomplete="off">
+                {% csrf_token %}
+                  <p>Please choose a user</p>
+                        <label for="optTweet" class="sr-only">Select user to view their tweets</label><br>
+                          <select class="custom-select" size = "25" id="optTweet" name="tweet" required>
+                                <option value="{{users.id}}">@{{ users.screen_name }}, Name: {{ users.name }}, Bio: {{ users.description }}, Followers: {{ users.followers_count}}, Following: {{ users.friends_count }}, Tweets: {{ users.statuses_count }}  </option>
+                          </select>
+                        <div style="text-align:center; padding: 5px 10px;">
+                          <a href="{% url 'index'%}" class="btn btn-danger" role="button">Start Again</a>
+                          <input class="btn btn-success" type="submit" name="submit" value="Submit"/>
+                        </div>
+                </form>
+            </div>
+    </div>
+{% endblock %}

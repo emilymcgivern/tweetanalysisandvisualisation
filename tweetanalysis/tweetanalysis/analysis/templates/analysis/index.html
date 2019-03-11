@@ -1,0 +1,65 @@
+{% extends 'analysis/base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+      <div class="row">
+            <div class="form-group col-md-12">
+              <div style="text-align:center;">
+                <h1>Search Page</h1>
+              </div>
+
+          <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                  <li class="nav-item" >
+                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Search User</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Search Hashtag</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Search Term</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <form class="col-lg-6 offset-lg-3" id="user_form" method="post" action="{% url 'get_user_results' %}">
+                    {% csrf_token %}
+                    <div style="text-align:center; padding: 5px 10px;">
+                      <input class="form-control" type="text" size="50" name="handle" value="{{handle}}" id="handle" placeholder="Please enter a Twitter handle to get user information" />
+                    </div>
+                    <div style="text-align:center; padding: 5px 10px;">
+                      <input class="btn btn-success" type="submit" name="submit" value="Search" />
+                  </div>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <form class="col-lg-6 offset-lg-3" id="user_form" method="post" action="{% url 'hashtag_results' %}">
+                    {% csrf_token %}
+                    <div style="text-align:center; padding: 5px 10px;">
+                      <input class="form-control" type="text" size="50" name="hashtag" value="{{hashtag}}" id="hashtag" placeholder = "Please enter a hashtag"/>
+                    </div>
+                    <div style="text-align:center; padding: 5px 10px;">
+                      <input class="btn btn-success" type="submit" name="submit" value="Search" />
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+              <form class="col-lg-6 offset-lg-3" id="user_form" method="post" action="{% url 'search_term_results' %}">
+                  {% csrf_token %}
+                    <div style="text-align:center; padding: 5px 10px;">
+                      <input class="form-control" type="text" size="50" name="query" value="{{query}}" id="query" placeholder = "Please enter a search term"/>
+                    </div>
+                    <div style="text-align:center; padding: 5px 10px;">
+                      <input class="btn btn-success" type="submit" name="submit" value="Search"/>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

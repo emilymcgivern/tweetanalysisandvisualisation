@@ -1,0 +1,45 @@
+{% extends 'analysis/base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+        <div style="text-align:center;">
+            <h1>Tweet Analysis and Visualisation</h1>
+        <hr>
+        <h5> Please choose a graph to view from the following list: </h5>
+        </div>
+
+        <div class="list-group">
+            <a href="{% url 'view_all' %}" class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Overall Monitored View Graph</h5>
+              </div>
+              <p class="mb-1">Overall monitored view of the selected tweet. You can see the growth in likes, retweets and followers over the selected period.</p>
+            </a>
+            <a href="{% url 'view_both' %}" class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Comapare Likes and Retweets Graph</h5>
+              </div>
+              <p class="mb-1">View a comparison of the number of likes versus the number of retweets over the selected period.</p>
+            </a>
+            <a href="{% url 'view_followers' %}" class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Follower Activity Graph</h5>
+              </div>
+              <p class="mb-1">View the growth in followers over the selected period.</p>
+            </a>
+            <a href="{% url 'view_likes' %}" class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Likes Activity Graph</h5>
+              </div>
+              <p class="mb-1">View the growth in likes over the selected period.</p>
+            </a>
+            <a href="{% url 'view_retweets' %}" class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Retweets Activity Graph</h5>
+              </div>
+              <p class="mb-1">View the growth in retweets over the selected period.</p>
+            </a>
+     
+</div>
+{% endblock %}
+

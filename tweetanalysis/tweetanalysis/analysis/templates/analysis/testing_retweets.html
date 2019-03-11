@@ -1,0 +1,138 @@
+{% extends 'analysis/new_graph_base.html'%}
+
+
+{% block content %}
+<body onload="loadFunction()" style="margin:0;">
+<div id="loader"></div>
+<div id="myDiv" style="width:1200px;height:600px;background-color:'#f4f4f4'; margin: auto;">
+
+<!-- end of loading display -->
+
+
+  <script>
+
+  axios.get('/sentiment')
+  .then(function ({data}) {
+    console.log(data);
+    // handle success
+    var all_sents = data[0]
+
+    var retweets = data[1]
+    var likes = data[2]
+    var followers = data[3]
+
+    var positives = [], neutrals = [], negatives = []
+    var p_retweets = [], nt_retweets = [], ng_retweets = []
+
+    // // document.write(" all sents: ", all_sents);
+    // // document.write(" retweet count: ", retweets);
+    // // document.write(" like count: ", likes);
+
+    for (i = 0; i < all_sents.length; i++) {
+      if (all_sents[i] >= 0.05)
+      {
+         positives.push(all_sents[i]);
+         p_retweets.push(retweets[i]);
+      }
+      else if (all_sents[i] > -0.05 && all_sents[i] < 0.05)
+      {
+         neutrals.push(all_sents[i]);
+         nt_retweets.push(retweets[i]);
+      }
+      else
+      {
+         negatives.push(all_sents[i]);
+         ng_retweets.push(retweets[i]);
+      }
+    }
+    
+
+    var trace1 = {
+      x: positives,
+      y: p_retweets,
+      mode: 'markers',
+      type: 'scatter',
+      name: 'Positive',
+      marker: { size: 12, color: "#27ae60", },    // green
+      hoverlabel: {namelength :-1},
+    };
+
+    var trace2 = {
+      x: neutrals,
+      y: nt_retweets,
+      mode: 'markers',
+      type: 'scatter',
+      name: 'Neutral',
+      marker: { size: 12, color: "#f39c12" },     // (orange #d35400 /alternate yellow #f39c12)
+      hoverlabel: {namelength :-1},
+    };
+
+    var trace3 = {
+      x: negatives,
+      y: ng_retweets,
+      mode: 'markers',
+      type: 'scatter',
+      name: 'Negative',
+      marker: { size: 12, color: "#c0392b" },     // red
+      hoverlabel: {namelength :-1},
+    };
+
+  var data = [ trace1, trace2, trace3 ];
+
+  var layout = {
+      xaxis: {
+        range: [ -1.05, 1.05 ],
+        title: {
+          text: 'Sentiment',
+          font: {
+            family: 'Courier New, monospace',
+            size: 18,
+            color: '#7f7f7f',
+          }
+        },
+      },
+      yaxis: {
+        autorange: 'True',
+        title: {
+          text: 'Number of Retweets',
+          font: {
+            family: 'Courier New, monospace',
+            size: 18,
+            color: '#7f7f7f',
+          }
+        },
+      },
+      title: {
+        text: 'All Saved Tweets Number of Retweets vs Sentiment',
+        font:{
+          family: 'Courier New, monospace',
+          size: 24
+        }
+      }
+  };
+  Plotly.newPlot('myDiv', data, layout, {showSendToCloud: true});
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+</script>
+<script>
+
+  var myVar
+ 
+  function loadFunction() {
+    myVar = setTimeout(showPage, 400);       
+  }
+
+
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
+  }
+  
+  </script>
+</body>
+{% endblock %}
+</html>

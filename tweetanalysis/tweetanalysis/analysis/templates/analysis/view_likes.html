@@ -1,0 +1,130 @@
+{% extends 'analysis/graph_base.html'%}
+
+
+{% block content %}
+<body onload="loadFunction()" style="margin:0;">
+
+<div id="loader"></div>
+
+<!--------------------------------- end of loading display -------------------------------------->
+
+
+  <div id="myDiv" style=" width:1400px;height:850px;background-color:'#f4f4f4'; ">
+  <script>
+
+  axios.get('/update_reactions')
+  .then(function ({data}) {
+    console.log(data);
+
+  
+  // gathering and sorting the data for the graphs:
+  var date_saved = data[0]
+  
+  var likes_count = data[1]
+  var start_likes = likes_count[0]
+  var end_likes = likes_count[likes_count.length - 1]
+
+  var tweet = data[4]
+
+
+  // trace one: Number of Likes:
+  var trace1 = {
+  x: date_saved,
+  y: likes_count,
+  mode: 'lines+markers',
+        marker: {
+          color: '#32CD32',           // for dots: green turquoise colour #78C6DA green #32CD32
+          size: 10,                   // dot size
+        },
+        name: 'Number of Likes',
+        line: {color: '#32CD32'},     // green turquoise colour #78C6DA     green #32CD32
+  hoverlabel: {namelength :-1},       // hover label include whole title
+  };
+
+  var data = [trace1];              // data for Likes
+
+
+
+  // setting up the layout for the graph:
+  var layout = {
+    xaxis: {
+      title: {
+        text: 'Date & Time',
+        font: {
+          family: 'Courier New, monospace',
+          size: 18,
+          color: '#7f7f7f',
+        }
+      },
+      automargin: true,
+    },
+    yaxis: {
+            autorange: 'True',
+            title: {
+              text: 'Number of Likes',
+              font: {
+                family: 'Courier New, monospace',
+                size: 18,
+                color: '#7f7f7f',
+              }
+            },
+            automargin: true,
+          },
+    showlegend: true,
+    hovermode:'closest',
+    annotations: [                            // this is where we print the monitored tweet, under the title of the graph
+      {
+        x: 0.0,
+        y: 1.05,
+        xref: 'paper',
+        yref: 'paper',
+        text: 'Tweet: '  + tweet[0],
+        font: {
+          family: 'Courier New, monospace',
+          size: 14,
+          color:'#483D8B',
+        },
+        showarrow: false,
+        align: 'center',
+      },
+    ],
+    title: {                                          // title of entire graph
+      text: 'Overall Monitored Single Tweet View',
+      font:{
+        family: 'Courier New, monospace',
+        size: 24
+      }
+    }
+  };
+
+Plotly.newPlot('myDiv', data, layout, {responsive: true});
+
+  console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+</script>
+</div>
+<script>
+
+
+  // -------------------these are for the loading display -----------------------------
+
+  var myVar
+ 
+  function loadFunction() {
+    myVar = setTimeout(showPage, 400);       
+  }
+
+
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
+  }
+  
+  </script>
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+
+{% block content %}
+  <div class="container-fluid">
+        <div style="text-align:center;">
+            <h3>Welcome to the Tweet Analysis and Visualisation Tool</h3>
+            <p>You are not logged in</p>
+        </div>
+        <div id="myGraph"></div>
+
+  <script>
+  var trace1 = {
+    x: ['12:00', '13:00', '14:00','15:00', '16:00', '17:00', '18:00', '19:00', '20:00'],
+    y: [0, 3, 6, 4, 6, 5, 7, 9, 10],
+    mode: 'lines+markers',
+        marker: {
+          color: '#3FBF3F',           // for dots: green turquoise colour #78C6DA green #32CD32
+          size: 10,                   // dot size
+        },
+        name: 'Number of Likes',
+        line: {color: '#3FBF3F'},     // green turquoise colour #78C6DA     green #32CD32 
+    };
+  
+  var trace2 = {
+    x: ['12:00', '13:00', '14:00','15:00', '16:00', '17:00', '18:00', '19:00', '20:00'],
+    y: [0, 1, 2, 3, 4, 4, 7, 11, 12],
+    name: 'Number of Retweets',
+    type: 'scatter',
+    mode: 'lines+markers',
+          marker: {
+            color: '#7F3FBF',         // for dots: grey blue #8CBCD0, lavender blue #8C9EEE, green turquoise #78C6DA, blue turquoise #82D0C6
+            size: 10,                   // dot size
+          },
+          name: 'Number of Retweets',
+          line: {color: '#7F3FBF'},     // for line: lavender blue #8C9EEE
+  };
+  
+  var data = [trace1, trace2];
+
+    var layout = {
+    xaxis: {
+      // autorange: 'True',           // if this is on the xaxis labels stay horizointal
+      title: {
+        text: 'Date & Time',
+        font: {
+          family: 'Courier New, monospace',
+          size: 18,
+          color: '#7f7f7f',
+        }
+      },
+      automargin: true,
+    },
+    yaxis: {
+            autorange: 'True',
+            title: {
+              text: 'Number of Likes & Retweets',
+              font: {
+                family: 'Courier New, monospace',
+                size: 18,
+                color: '#7f7f7f',
+              }
+            },
+            // automargin: 'True',
+          },
+    hovermode:'closest',
+  };
+  
+  Plotly.newPlot('myGraph', data, layout);
+  
+  </script>
+  </div>
+
+{% endblock %}
+

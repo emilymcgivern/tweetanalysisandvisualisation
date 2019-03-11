@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password reset on example.com
+From: webmaster@localhost
+To: Emily.mcgivern3@mail.dcu.ie
+Date: Fri, 08 Mar 2019 08:55:25 -0000
+Message-ID: <155203532575.30909.9755481210950578856@Emilys-MacBook-Pro.local>
+
+
+You're receiving this email because you requested a password reset for your user account at example.com.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1/accounts/reset/Mw/54g-435c80f38641b498941f/
+
+Your username, in case you've forgotten: emilymcgivern
+
+Thanks for using our site!
+
+The example.com team
+
+
+
+-------------------------------------------------------------------------------

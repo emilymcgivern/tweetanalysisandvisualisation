@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div style="text-align:center;">
+          <h1>Login Page</h1>
+        </div>
+
+        <hr>
+
+          <div style="text-align:center;">
+          <p><b> Please enter your username and password </b></p>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <a href="{% url 'password_reset'%}" class="btn btn-primary" role="button">Reset Your Password</a>
+          <button type="submit" class="btn btn-success">Login</button>
+        </form>
+      </div>
+  
+  </div>
+{% endblock %}

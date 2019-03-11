@@ -1,0 +1,18 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [example.com] Please Confirm Your E-mail Address
+From: webmaster@localhost
+To: hiphop2@dcu.ie
+Date: Mon, 18 Feb 2019 17:29:08 -0000
+Message-ID: <155051094830.13381.1297713862187183240@Mills-MacBook-Pro.local>
+
+Hello from example.com!
+
+You're receiving this e-mail because user 3rd has given yours as an e-mail address to connect their account.
+
+To confirm this is correct, go to http://127.0.0.1:8000/accounts/confirm-email/Mg:1gvmj6:JkVxWs78wVJId6nJeU7NboaNqbs/
+
+Thank you from example.com!
+127.0.0.1
+-------------------------------------------------------------------------------

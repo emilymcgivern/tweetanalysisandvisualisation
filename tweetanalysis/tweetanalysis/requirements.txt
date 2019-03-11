@@ -1,0 +1,8 @@
+Django==2.1.5
+django-allauth==0.38.0
+django-extensions==2.1.5
+django-plotly-dash==0.9.8
+django-background-tasks==1.2.0
+tweepy==3.7.0
+vaderSentiment==3.2.1
+python-dateutil==2.7.5

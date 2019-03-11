@@ -1,0 +1,31 @@
+{% extends 'analysis/base.html' %}
+
+{% block content %}
+  <div class="container-fluid">
+        <div style="text-align:center;">
+          <h1>Search Results</h1>
+        </div>
+        <hr>
+       
+            <div style="text-align:center; padding: 5px 10px;">
+                <form action="{% url 'chosen_radio' %}" method="post" autocomplete="off">
+                {% csrf_token %}
+                <!-- Loop to display a tweet which has been returned as an object in the views -->
+                  <p>Please choose a tweet</p>
+                        <label for="optTweet" class="sr-only">Select a tweet</label><br>
+                          <select class="custom-select" size = "25" id="optTweet" name="tweet" required>
+                            {% for tweet in matching_tweets %}
+                              <option style = "color: #000;" disabled value="{{tweet.id}}">Tweet</option>
+                              <option value="{{tweet.id}}">{{ tweet.full_text }}</option>
+                              <option disabled value="{{tweet.id}}">Date Posted: {{ tweet.created_at }}</option>
+                              <option disabled value=""></option>
+                            {% endfor %}
+                          </select>
+                        <div style="text-align:center; padding: 5px 10px;">
+                          <input class="btn btn-primary" type="submit" name="submit" value="Submit"/>
+                        </div>
+                </form>
+            </div>
+    </div>
+{% endblock %}
+
